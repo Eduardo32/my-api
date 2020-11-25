@@ -4,11 +4,8 @@ const UserController = require('./controllers/UserController');
 const routes = Router();
 
 routes.get('/users', UserController.index);
-routes.post('/user', UserController.store);
-/*
-routes.get('/', (req, res) => {
-    res.json({ user: 'tobi' })
-});
-//*/
+routes.post('/users', UserController.store);
+routes.put('/users/:id', UserController.update);
+routes.delete('/users/:id', UserController.delete);
 
 module.exports = routes;
