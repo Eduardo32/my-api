@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const routes = require('./routes');
 
@@ -12,7 +13,7 @@ mongoose.connect('mongodb://user_next_api:Y9xoFu4RI4Za3HDl@cluster0-shard-00-00.
     console.log("Conectado com sucesso ao banco de dados")
 }).catch(err => console.log("NÃO CONECTOU -> " + err));
 
-//app.use(cors());
+app.use(cors());
 app.use(express.json());
 app.use(routes);
 
