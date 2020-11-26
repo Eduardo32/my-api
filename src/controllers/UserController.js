@@ -1,17 +1,23 @@
-const User = require('../schema/User');
+const User = require('../model/User');
 
 module.exports = {
     async store(req, res) {
         const { firstName, lastName, userName, email } = req.body;
 
-        const user = await User.create({
-            firstName,
-            lastName,
-            userName,
-            email,
-        });
-    
-        return res.json(user);
+        let user = await User.findOne({ email });
+
+        if(!user) {
+            user = await User.create({
+                firstName,
+                lastName,
+                userName,
+                email,
+            });
+
+            return res.status(201).json(user);
+        } else {
+            return res.status(400).json({ error: 'Usuario já cadastrado'});
+        }
     },
 
 
